@@ -6,6 +6,7 @@ import soloMapling.ArtificialPlayer.BotCommandsPack.SocialCommands;
 import soloMapling.ArtificialPlayer.BotMessagingSystem.ChatMessage;
 import soloMapling.ArtificialPlayer.BotMessagingSystem.MessageQueue;
 import soloMapling.ArtificialPlayer.BotSM;
+import soloMapling.ArtificialPlayer.BotProactiveSocial;
 import soloMapling.ArtificialPlayer.BotTradeSystem.BotTradeSM;
 import soloMapling.FreeMarket.FMItem;
 
@@ -192,6 +193,11 @@ public class SellingMerchantBot extends BotSM {
             return;
         }
         if (getState() == BotState.TRADING) {
+            return;
+        }
+        // A pending invitation must retain the advertised item and price.
+        BotProactiveSocial.maybeOfferMerchantTrade(this, getTradeMode());
+        if (BotProactiveSocial.isAwaitingTradeResponse(getChr())) {
             return;
         }
         getDebugger().debugLoggingFull(
