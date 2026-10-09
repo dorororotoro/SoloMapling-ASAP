@@ -13,6 +13,7 @@ import soloMapling.ArtificialPlayer.BotOptionMenu;
 import soloMapling.ArtificialPlayer.BotPartySystem.BotPartyQueue;
 import soloMapling.ArtificialPlayer.BotPartySystem.BotRecruitManager;
 import soloMapling.ArtificialPlayer.BotSM;
+import soloMapling.ArtificialPlayer.BotProactiveSocial;
 import soloMapling.ArtificialPlayer.BotTypeManager;
 import server.life.Monster;
 import server.maps.MapleMap;
@@ -378,6 +379,7 @@ public class TrainingBot extends BotSM {
         }
 
         pollRecruitInvite(); // gated party-invite drain (the "wanna party up?" flow)
+        BotProactiveSocial.maybeOfferParty(this, phase == Phase.GRIND && !recruitingNow());
         soloMenu.poll();
         partyMenu.poll();    // kept last: a "Follow me!" selection converts this bot away
     }

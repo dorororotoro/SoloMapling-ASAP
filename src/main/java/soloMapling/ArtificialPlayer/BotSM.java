@@ -393,6 +393,7 @@ public abstract class BotSM implements EventSubscriber {
         EventBus.getInstance().unsubscribeAll(this);
         botClearChalkboard(this.getChr());
         BotTickService.unregister(getChr().getId());
+        BotProactiveSocial.onBotRemoved(getChr());
     }
 
     // todo
